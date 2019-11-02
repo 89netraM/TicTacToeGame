@@ -35,10 +35,10 @@ namespace MoreTec.TicTacToe
 		/// Places a marker on the specified coordinates.
 		/// </summary>
 		/// <param name="marker">The type of the marker.</param>
-		/// <param name="x">The x coordinate of the square.</param>
-		/// <param name="y">The y coordinate of the square.</param>
+		/// <param name="row">The row of the square.</param>
+		/// <param name="col">The column of the square.</param>
 		/// <exception cref="InvalidOperationException">Throws an exception if the same player goes twies in a row.</exception>
-		public void PlaceMarker(Marker marker, int x, int y)
+		public void PlaceMarker(Marker marker, int row, int col)
 		{
 			if (NextTurn != null && marker != NextTurn)
 			{
@@ -47,17 +47,17 @@ namespace MoreTec.TicTacToe
 
 			NextTurn = marker == Marker.Cross ? Marker.Circle : Marker.Cross;
 
-			Board.PlaceMarker(marker, x, y);
+			Board.PlaceMarker(marker, row, col);
 
-			UpdateGameState(marker, x, y);
+			UpdateGameState(marker, row, col);
 		}
 
-		private void UpdateGameState(Marker marker, int x, int y)
+		private void UpdateGameState(Marker marker, int row, int col)
 		{
-			if (WasWinningHorizontalMove(marker, x, y) ||
-				WasWinningVerticalMove(marker, x, y) ||
-				WasWinningDiagonalMove(marker, x, y) ||
-				WasWinningOtherDiagonalMove(marker, x, y))
+			if (WasWinningHorizontalMove(marker, row, col) ||
+				WasWinningVerticalMove(marker, row, col) ||
+				WasWinningDiagonalMove(marker, row, col) ||
+				WasWinningOtherDiagonalMove(marker, row, col))
 			{
 				if (marker == Marker.Cross)
 				{
@@ -74,44 +74,44 @@ namespace MoreTec.TicTacToe
 			}
 		}
 
-		private int GetMinX(int x) => Math.Max(0, x - (GoalLength - 1)) - x;
-		private int GetMaxX(int x) => Math.Min(x + 1, Board.Size - (GoalLength - 1)) - x;
-		private int GetMinY(int y) => Math.Max(0, y - (GoalLength - 1)) - y;
-		private int GetMaxY(int y) => Math.Min(y + 1, Board.Size - (GoalLength - 1)) - y;
-		private bool WasWinningHorizontalMove(Marker marker, int x, int y)
+		private int GetMinRow(int row) => Math.Max(0, row - (GoalLength - 1)) - row;
+		private int GetMaxRow(int row) => Math.Min(row + 1, Board.Size - (GoalLength - 1)) - row;
+		private int GetMinCol(int col) => Math.Max(0, col - (GoalLength - 1)) - col;
+		private int GetMaxCol(int col) => Math.Min(col + 1, Board.Size - (GoalLength - 1)) - col;
+		private bool WasWinningHorizontalMove(Marker marker, int row, int col)
 		{
 			return WasWinningMove(
 				marker,
-				GetMinX(x),
-				GetMaxX(x),
-				delta => Board[x + delta, y]
+				GetMinRow(row),
+				GetMaxRow(row),
+				delta => Board[row + delta, col]
 			);
 		}
-		private bool WasWinningVerticalMove(Marker marker, int x, int y)
+		private bool WasWinningVerticalMove(Marker marker, int row, int col)
 		{
 			return WasWinningMove(
 				marker,
-				GetMinY(y),
-				GetMaxY(y),
-				delta => Board[x, y + delta]
+				GetMinCol(col),
+				GetMaxCol(col),
+				delta => Board[row, col + delta]
 			);
 		}
-		private bool WasWinningDiagonalMove(Marker marker, int x, int y)
+		private bool WasWinningDiagonalMove(Marker marker, int row, int col)
 		{
 			return WasWinningMove(
 				marker,
-				Math.Max(GetMinX(x), GetMinY(y)),
-				Math.Min(GetMaxX(x), GetMaxY(y)),
-				delta => Board[x + delta, y + delta]
+				Math.Max(GetMinRow(row), GetMinCol(col)),
+				Math.Min(GetMaxRow(row), GetMaxCol(col)),
+				delta => Board[row + delta, col + delta]
 			);
 		}
-		private bool WasWinningOtherDiagonalMove(Marker marker, int x, int y)
+		private bool WasWinningOtherDiagonalMove(Marker marker, int row, int col)
 		{
 			return WasWinningMove(
 				marker,
-				Math.Max(GetMinX(x), Math.Max(y - (Board.Size - 1), -(GoalLength - 1))),
-				Math.Min(GetMaxX(x), Math.Min(1, 1 + y - (GoalLength - 1))),
-				delta => Board[x + delta, y - delta]
+				Math.Max(GetMinRow(row), Math.Max(col - (Board.Size - 1), -(GoalLength - 1))),
+				Math.Min(GetMaxRow(row), Math.Min(1, 1 + col - (GoalLength - 1))),
+				delta => Board[row + delta, col - delta]
 			);
 		}
 		private bool WasWinningMove(Marker marker, int min, int max, Func<int, Marker?> boardSquareGetter)
@@ -140,11 +140,11 @@ namespace MoreTec.TicTacToe
 
 		private bool IsBoardFull()
 		{
-			for (int x = 0; x < Board.Size; x++)
+			for (int row = 0; row < Board.Size; row++)
 			{
-				for (int y = 0; y < Board.Size; y++)
+				for (int col = 0; col < Board.Size; col++)
 				{
-					if (Board[x, y] == null)
+					if (Board[row, col] == null)
 					{
 						return false;
 					}

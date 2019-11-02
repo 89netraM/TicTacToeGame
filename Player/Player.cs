@@ -56,8 +56,8 @@ namespace MoreTec.Player
 			{
 				currentOutput.WriteLine(StringRepresentations.Board(game.Board));
 				string input = currentInput.ReadLine();
-				(int posX, int posY) = GetInputPosition(input);
-				game.PlaceMarker(currentMarker, posX, posY);
+				(int row, int col) = GetInputPosition(input);
+				game.PlaceMarker(currentMarker, row, col);
 
 				if (currentMarker == Marker.Cross)
 				{

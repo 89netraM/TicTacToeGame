@@ -10,16 +10,16 @@ namespace MoreTec.Player
 		{
 			string[] rows = new string[board.Size];
 
-			for (int x = 0; x < board.Size; x++)
+			for (int row = 0; row < board.Size; row++)
 			{
 				StringBuilder rowBuilder = new StringBuilder();
 
-				for (int y = 0; y < board.Size; y++)
+				for (int col = 0; col < board.Size; col++)
 				{
-					rowBuilder.Append(Marker(board[x, y]));
+					rowBuilder.Append(Marker(board[row, col]));
 				}
 
-				rows[x] = rowBuilder.ToString();
+				rows[row] = rowBuilder.ToString();
 			}
 
 			return String.Join('\n', rows);

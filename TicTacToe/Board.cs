@@ -10,10 +10,10 @@ namespace MoreTec.TicTacToe
 		/// The square sizeof this board.
 		/// </summary>
 		public int Size => squares.GetLength(0);
-		public Marker? this[int x, int y]
+		public Marker? this[int row, int col]
 		{
-			get => squares[x, y];
-			private set => squares[x, y] = value;
+			get => squares[row, col];
+			private set => squares[row, col] = value;
 		}
 
 		/// <summary>
@@ -29,18 +29,18 @@ namespace MoreTec.TicTacToe
 		/// Places a marker on the board.
 		/// </summary>
 		/// <param name="marker">The type of the marker.</param>
-		/// <param name="x">The x coordinate of the square.</param>
-		/// <param name="y">The y coordinate of the square.</param>
+		/// <param name="row">The row of the square.</param>
+		/// <param name="col">The column of the square.</param>
 		/// <exception cref="InvalidOperationException">Throws an exception if the square is already occupied.</exception>
-		public void PlaceMarker(Marker marker, int x, int y)
+		public void PlaceMarker(Marker marker, int row, int col)
 		{
-			if (this[x, y] != null)
+			if (this[row, col] != null)
 			{
 				throw new InvalidOperationException("Can not place a marker on an already occupied square.");
 			}
 			else
 			{
-				this[x, y] = marker;
+				this[row, col] = marker;
 			}
 		}
 	}

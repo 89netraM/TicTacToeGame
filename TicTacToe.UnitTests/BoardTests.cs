@@ -17,11 +17,11 @@ namespace MoreTec.TicTacToe.UnitTests
 		[TestMethod]
 		public void ShouldStartFullOfNull()
 		{
-			for (int x = 0; x < board.Size; x++)
+			for (int row = 0; row < board.Size; row++)
 			{
-				for (int y = 0; y < board.Size; y++)
+				for (int col = 0; col < board.Size; col++)
 				{
-					Assert.IsNull(board[x, y], "All squares on a new board should be null.");
+					Assert.IsNull(board[row, col], "All squares on a new board should be null.");
 				}
 			}
 		}
