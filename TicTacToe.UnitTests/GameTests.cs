@@ -106,6 +106,25 @@ namespace MoreTec.TicTacToe.UnitTests
 		}
 
 		[TestMethod]
+		public void ShouldBeAbleToWinOtherDiagonally()
+		{
+			game.PlaceMarker(Marker.Circle, 2, 2);
+			Assert.AreEqual(GameState.InProgress, game.State);
+
+			game.PlaceMarker(Marker.Cross, 2, 3);
+			Assert.AreEqual(GameState.InProgress, game.State);
+
+			game.PlaceMarker(Marker.Circle, 1, 3);
+			Assert.AreEqual(GameState.InProgress, game.State);
+
+			game.PlaceMarker(Marker.Cross, 1, 0);
+			Assert.AreEqual(GameState.InProgress, game.State);
+
+			game.PlaceMarker(Marker.Circle, 3, 1);
+			Assert.AreEqual(GameState.CircleWon, game.State);
+		}
+
+		[TestMethod]
 		public void ShouldBeAbleToDraw()
 		{
 			game.PlaceMarker(Marker.Circle, 0, 0);

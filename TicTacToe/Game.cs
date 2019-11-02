@@ -56,7 +56,8 @@ namespace MoreTec.TicTacToe
 		{
 			if (WasWinningHorizontalMove(marker, x, y) ||
 				WasWinningVerticalMove(marker, x, y) ||
-				WasWinningDiagonalMove(marker, x, y))
+				WasWinningDiagonalMove(marker, x, y) ||
+				WasWinningOtherDiagonalMove(marker, x, y))
 			{
 				if (marker == Marker.Cross)
 				{
@@ -102,6 +103,15 @@ namespace MoreTec.TicTacToe
 				Math.Max(GetMinX(x), GetMinY(y)),
 				Math.Min(GetMaxX(x), GetMaxY(y)),
 				delta => Board[x + delta, y + delta]
+			);
+		}
+		private bool WasWinningOtherDiagonalMove(Marker marker, int x, int y)
+		{
+			return WasWinningMove(
+				marker,
+				Math.Max(GetMinX(x), Math.Max(y - (Board.Size - 1), -(GoalLength - 1))),
+				Math.Min(GetMaxX(x), Math.Min(1, 1 + y - (GoalLength - 1))),
+				delta => Board[x + delta, y - delta]
 			);
 		}
 		private bool WasWinningMove(Marker marker, int min, int max, Func<int, Marker?> boardSquareGetter)
