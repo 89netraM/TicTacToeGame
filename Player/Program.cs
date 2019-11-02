@@ -11,6 +11,17 @@ namespace MoreTec.Player
 		{
 			Dictionary<string, string> argsMap = ParseArguments(args);
 
+			int boardSize = 3;
+			if (argsMap.ContainsKey("size"))
+			{
+				boardSize = int.Parse(argsMap["size"]);
+			}
+
+			int goalLength = boardSize;
+			if (argsMap.ContainsKey("goal-length"))
+			{
+				goalLength = int.Parse(argsMap["goal-length"]);
+			}
 
 			TextReader crossInput;
 			TextWriter crossOutput;
@@ -40,7 +51,7 @@ namespace MoreTec.Player
 				circleOutput = Console.Out;
 			}
 
-			Player player = new Player(3, 3, crossInput, crossOutput, circleInput, circleOutput);
+			Player player = new Player(boardSize, goalLength, crossInput, crossOutput, circleInput, circleOutput);
 			player.Play();
 		}
 
