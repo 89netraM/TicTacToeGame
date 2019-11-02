@@ -54,11 +54,7 @@ namespace MoreTec.TicTacToe
 
 		private void UpdateGameState(Marker marker, int x, int y)
 		{
-			if (IsBoardFull())
-			{
-				State = GameState.Draw;
-			}
-			else if (WasWinningHorizontalMove(marker, x, y) ||
+			if (WasWinningHorizontalMove(marker, x, y) ||
 				WasWinningVerticalMove(marker, x, y) ||
 				WasWinningDiagonalMove(marker, x, y))
 			{
@@ -70,6 +66,10 @@ namespace MoreTec.TicTacToe
 				{
 					State = GameState.CircleWon;
 				}
+			}
+			else if (IsBoardFull())
+			{
+				State = GameState.Draw;
 			}
 		}
 
