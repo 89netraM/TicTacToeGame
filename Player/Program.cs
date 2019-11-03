@@ -11,6 +11,12 @@ namespace MoreTec.Player
 		{
 			Dictionary<string, string> argsMap = ParseArguments(args);
 
+			if (argsMap.ContainsKey("help"))
+			{
+				PrintHelp();
+				return;
+			}
+
 			int boardSize = 3;
 			if (argsMap.ContainsKey("size"))
 			{
@@ -76,6 +82,21 @@ namespace MoreTec.Player
 			}
 
 			return argsMap;
+		}
+
+		private static void PrintHelp()
+		{
+			Console.WriteLine(
+@"Options:
+  --help               Prints out the help.
+  --size <int>         Sets the size of the game board.
+  --goal-length <int>  Sets the length required for victory. Default is same
+                       as the board size.
+  --cross <string>     Path to an executable that should act as the cross
+                       player.
+  --circle <string>    Path to an executable that should act as the circle
+                       player."
+			);
 		}
 	}
 }
