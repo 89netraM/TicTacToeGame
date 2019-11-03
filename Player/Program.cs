@@ -33,9 +33,15 @@ namespace MoreTec.Player
 			TextWriter crossOutput;
 			if (argsMap.ContainsKey("cross"))
 			{
-				Process cross = Process.Start(argsMap["cross"], String.Join(' ', boardSize, goalLength, 'X'));
-				crossInput = cross.StandardOutput;
-				crossOutput = cross.StandardInput;
+				ProcessStartInfo startInfo = new ProcessStartInfo(argsMap["cross"], String.Join(" ", boardSize, goalLength, "X"))
+				{
+					RedirectStandardInput = true,
+					RedirectStandardOutput = true,
+					CreateNoWindow = false
+				};
+				Process process = Process.Start(startInfo);
+				crossInput = process.StandardOutput;
+				crossOutput = process.StandardInput;
 			}
 			else
 			{
@@ -47,9 +53,15 @@ namespace MoreTec.Player
 			TextWriter circleOutput;
 			if (argsMap.ContainsKey("circle"))
 			{
-				Process circle = Process.Start(argsMap["circle"], String.Join(' ', boardSize, goalLength, 'O'));
-				circleInput = circle.StandardOutput;
-				circleOutput = circle.StandardInput;
+				ProcessStartInfo startInfo = new ProcessStartInfo(argsMap["circle"], String.Join(" ", boardSize, goalLength, "O"))
+				{
+					RedirectStandardInput = true,
+					RedirectStandardOutput = true,
+					CreateNoWindow = false
+				};
+				Process process = Process.Start(startInfo);
+				circleInput = process.StandardOutput;
+				circleOutput = process.StandardInput;
 			}
 			else
 			{
