@@ -16,6 +16,9 @@ namespace MoreTec.Player
 
 		private readonly Game game;
 
+		public Board Board => game.Board;
+		public GameState GameState => game.State;
+
 		/// <summary>
 		/// Creates a new game and sets it to be played be two sets of reader/writers.
 		/// </summary>

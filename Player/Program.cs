@@ -37,7 +37,8 @@ namespace MoreTec.Player
 				{
 					RedirectStandardInput = true,
 					RedirectStandardOutput = true,
-					CreateNoWindow = false
+					CreateNoWindow = true,
+					UseShellExecute = false
 				};
 				Process process = Process.Start(startInfo);
 				crossInput = process.StandardOutput;
@@ -57,7 +58,8 @@ namespace MoreTec.Player
 				{
 					RedirectStandardInput = true,
 					RedirectStandardOutput = true,
-					CreateNoWindow = false
+					CreateNoWindow = true,
+					UseShellExecute = false
 				};
 				Process process = Process.Start(startInfo);
 				circleInput = process.StandardOutput;
@@ -71,6 +73,9 @@ namespace MoreTec.Player
 
 			Player player = new Player(boardSize, goalLength, crossInput, crossOutput, circleInput, circleOutput);
 			player.Play();
+
+			Console.WriteLine(StringRepresentations.Board(player.Board));
+			Console.WriteLine(player.GameState);
 		}
 
 		private static Dictionary<string, string> ParseArguments(string[] args)
