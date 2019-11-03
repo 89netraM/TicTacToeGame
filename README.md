@@ -3,6 +3,10 @@
 Play TicTacToe against other people or against other programs. Or why not have
 two programs face off against each other?
 
+## Download
+
+Head over to the ["Releases" section](https://github.com/89netraM/TicTacToeGame/releases) to download the latest compiled version for either Windows or Linux.
+
 ## Usage
 
 ### Arguments
