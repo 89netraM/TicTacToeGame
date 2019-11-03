@@ -3,6 +3,10 @@
 Play TicTacToe against other people or against other programs. Or why not have
 two programs face off against each other?
 
+## Download
+
+Head over to the ["Releases" section](https://github.com/89netraM/TicTacToeGame/releases) to download the latest compiled version for either Windows or Linux.
+
 ## Usage
 
 ### Arguments
@@ -35,7 +39,7 @@ When a program is used as a player the program receives three starting arguments
 A person versus person game:
 
 ```shell
->MoreTec.Player.exe --size 3
+>TicTacToe.Player.exe --size 3
 <   
 <   
 <   
